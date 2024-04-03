@@ -9,7 +9,7 @@
 
 buildPythonPackage rec {
   pname = "aiopvapi";
-  version = "3.1.0";
+  version = "3.1.1";
   pyproject = true;
 
   disabled = pythonOlder "3.7";
@@ -18,7 +18,7 @@ buildPythonPackage rec {
     owner = "sander76";
     repo = "aio-powerview-api";
     rev = "refs/tags/v${version}";
-    hash = "sha256-nJjYGPxpnbq/8XFmLKbMU71buFdaNUj7PQES5FnlN3o=";
+    hash = "sha256-WtTqtVr1oL86dpsAIK55pbXWU4X/cajVLlggd6hfM4c=";
   };
 
   build-system = [
@@ -31,6 +31,11 @@ buildPythonPackage rec {
 
   nativeCheckInputs = [
     pytestCheckHook
+  ];
+
+  disabledTests = [
+    # https://github.com/sander76/aio-powerview-api/issues/39
+    "test_remove_shade_from_scene"
   ];
 
   pythonImportsCheck = [
